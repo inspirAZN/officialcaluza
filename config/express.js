@@ -36,10 +36,16 @@ module.exports = function(app, passport, db) {
     }
 
     // assign the template engine to .html files
-    app.engine('html', consolidate[config.templateEngine]);
+    // app.engine('html', consolidate[config.templateEngine]);
+
+    // hogan engine
+    app.engine('html', require('hogan-express'));
 
     // set .html as the default extension
     app.set('view engine', 'html');
+
+    app.set('layout', 'layouts/default');
+    app.set('partials', {header: "includes/header"});
 
     // Set views path, template engine and default layout
     app.set('views', config.root + '/app/views');
